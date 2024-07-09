@@ -2,38 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>笙声不息测试版</title>
+    <title>跳转到微信小程序</title>
 </head>
 <body>
- <button id="openMiniProgram">打开小程序</button>
+    <!-- 创建一个链接 -->
+    <a href="#" id="openMiniProgram">打开小程序</a>
 
-  <script>
-    // 获取按钮元素
-    const button = document.getElementById('openMiniProgram');
+    <!-- 引入微信JS-SDK -->
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script>
+        // 获取链接元素
+        const link = document.getElementById('openMiniProgram');
 
-    // 为按钮添加点击事件监听器
-    button.addEventListener('click', function() {
-      // 定义要打开的小程序的信息
-      const miniProgramInfo = {
-        appId: 'wxdc9c70178ee2a2f2', // 替换为目标小程序的appId
-        path: 'pages/lightshop/index', // 替换为目标小程序的具体页面路径
-        extraData: {
-          url: 'https://beikeshengshengbuxi.github.io/' // 将外部链接作为参数传递给目标小程序
-        }
-      };
+        // 为链接添加点击事件监听器
+        link.addEventListener('click', function(event) {
+            // 阻止默认的链接行为（即不直接跳转）
+            event.preventDefault();
 
-      // 调用微信提供的API来打开小程序
-      wx.navigateToMiniProgram(miniProgramInfo, function(res) {
-        if (res.errMsg === 'navigateToMiniProgram:ok') {
-          console.log('打开成功');
-        } else {
-          console.log('打开失败', res);
-        }
-      });
-    });
-  </script>
-  
+            // 定义要打开的小程序的信息
+            const miniProgramInfo = {
+                appId: 'wxdc9c70178ee2a2f2', // 替换为目标小程序的appId
+                path: 'pages/lightshop/index', // 替换为目标小程序的具体页面路径
+                extraData: {
+                    url: 'https://beikeshengshengbuxi.github.io/' // 将外部链接作为参数传递给目标小程序
+                }
+            };
 
+            // 调用微信提供的API来打开小程序
+            wx.navigateToMiniProgram(miniProgramInfo, function(res) {
+                if (res.errMsg === 'navigateToMiniProgram:ok') {
+                    console.log('打开成功');
+                } else {
+                    console.log('打开失败', res);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
